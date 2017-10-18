@@ -585,7 +585,7 @@ public abstract class AbstractDebugger implements Debugger, DebuggerObservable {
             .withType(Action.TYPE.RUN_TO_LOCATION)
             .withTarget(source)
             .withLineNumber(lineNumber);
-      service.runToLocation(debugSessionDto.getId(), action);
+    service.runToLocation(debugSessionDto.getId(), action);
   }
 
   @Override

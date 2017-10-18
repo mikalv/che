@@ -216,8 +216,8 @@ public interface Debugger {
   void resume(ResumeAction action) throws DebuggerException;
 
   /**
-   * Resume application is being debugged to specified location.
-   * When process reaches specified location then {@link SuspendEvent} must be fired.
+   * Resume application is being debugged to specified location. When process reaches specified
+   * location then {@link SuspendEvent} must be fired.
    *
    * @param action contains specific parameters
    * @throws DebuggerException if any error occur
