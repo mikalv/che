@@ -29,7 +29,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-/** @author Anatolii Bazko */
+/** @author Igor Vinokur */
 public class RunToLocationTest {
 
   private JavaDebugger debugger;

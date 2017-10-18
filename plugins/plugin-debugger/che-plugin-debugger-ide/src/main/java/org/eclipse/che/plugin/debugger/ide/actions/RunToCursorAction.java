@@ -28,7 +28,7 @@ import java.util.Collections;
 import static org.eclipse.che.ide.workspace.perspectives.project.ProjectPerspective.PROJECT_PERSPECTIVE_ID;
 
 /**
- * Action which allows run to cursor in debugger session
+ * Action which allows run application to cursor in debugger session
  *
  * @author Igor Vinokur
  */
@@ -45,10 +45,10 @@ public class RunToCursorAction extends AbstractPerspectiveAction {
       DebuggerResources resources) {
     super(
         Collections.singletonList(PROJECT_PERSPECTIVE_ID),
-        locale.jumpToCursor(),
-        locale.jumpToCursorDescription(),
+        locale.runToCursor(),
+        locale.runToCursorDescription(),
         null,
-        resources.runToLocation());
+        resources.runToCursor());
     this.debuggerManager = debuggerManager;
     this.editorAgent = editorAgent;
   }
@@ -60,7 +60,7 @@ public class RunToCursorAction extends AbstractPerspectiveAction {
     int line = ((TextEditor) editor).getCursorPosition().getLine() + 1;
     String path = editor.getEditorInput().getFile().getLocation().toString();
     if (debugger != null) {
-      debugger.jumpInto(line, path);
+      debugger.runToLocation(line, path);
     }
   }
 

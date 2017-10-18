@@ -36,7 +36,12 @@ import com.sun.jdi.request.InvalidRequestStateException;
 import com.sun.jdi.request.StepRequest;
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.Lock;
@@ -52,7 +57,12 @@ import org.eclipse.che.api.debug.shared.model.ThreadState;
 import org.eclipse.che.api.debug.shared.model.ThreadStatus;
 import org.eclipse.che.api.debug.shared.model.Variable;
 import org.eclipse.che.api.debug.shared.model.VariablePath;
-import org.eclipse.che.api.debug.shared.model.action.*;
+import org.eclipse.che.api.debug.shared.model.action.ResumeAction;
+import org.eclipse.che.api.debug.shared.model.action.RunToLocationAction;
+import org.eclipse.che.api.debug.shared.model.action.StartAction;
+import org.eclipse.che.api.debug.shared.model.action.StepIntoAction;
+import org.eclipse.che.api.debug.shared.model.action.StepOutAction;
+import org.eclipse.che.api.debug.shared.model.action.StepOverAction;
 import org.eclipse.che.api.debug.shared.model.impl.BreakpointImpl;
 import org.eclipse.che.api.debug.shared.model.impl.DebuggerInfoImpl;
 import org.eclipse.che.api.debug.shared.model.impl.LocationImpl;
@@ -302,8 +312,7 @@ public class JavaDebugger implements EventsHandler, Debugger {
     // start listening for the load of the type
     if (!classPrepareRequests.containsKey(className)) {
       ClassPrepareRequest request = getEventManager().createClassPrepareRequest();
-      // set class filter in order to reduce the amount of event traffic sent from the target VM to
-      // the debugger VM
+      // set class filter in order to reduce the amount of event traffic sent from the target VM to the debugger VM
       request.addClassFilter(className);
       request.enable();
       classPrepareRequests.put(className, request);

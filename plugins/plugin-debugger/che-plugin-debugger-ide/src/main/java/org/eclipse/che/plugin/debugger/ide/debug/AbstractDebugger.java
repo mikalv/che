@@ -30,7 +30,13 @@ import org.eclipse.che.api.debug.shared.dto.SimpleValueDto;
 import org.eclipse.che.api.debug.shared.dto.ThreadStateDto;
 import org.eclipse.che.api.debug.shared.dto.VariableDto;
 import org.eclipse.che.api.debug.shared.dto.VariablePathDto;
-import org.eclipse.che.api.debug.shared.dto.action.*;
+import org.eclipse.che.api.debug.shared.dto.action.ResumeActionDto;
+import org.eclipse.che.api.debug.shared.dto.action.RunToLocationActionDto;
+import org.eclipse.che.api.debug.shared.dto.action.StartActionDto;
+import org.eclipse.che.api.debug.shared.dto.action.StepIntoActionDto;
+import org.eclipse.che.api.debug.shared.dto.action.StepOutActionDto;
+import org.eclipse.che.api.debug.shared.dto.action.StepOverActionDto;
+import org.eclipse.che.api.debug.shared.dto.action.SuspendActionDto;
 import org.eclipse.che.api.debug.shared.dto.event.BreakpointActivatedEventDto;
 import org.eclipse.che.api.debug.shared.dto.event.DebuggerEventDto;
 import org.eclipse.che.api.debug.shared.dto.event.DisconnectEventDto;
@@ -572,14 +578,14 @@ public abstract class AbstractDebugger implements Debugger, DebuggerObservable {
   }
 
   @Override
-  public void jumpInto(int lineNumber, String source) {
-    RunToLocationActionDto jumpIntoActionDto =
+  public void runToLocation(int lineNumber, String source) {
+    RunToLocationActionDto action =
         dtoFactory
             .createDto(RunToLocationActionDto.class)
             .withType(Action.TYPE.RUN_TO_LOCATION)
             .withTarget(source)
             .withLineNumber(lineNumber);
-      service.jumpInto(debugSessionDto.getId(), jumpIntoActionDto);
+      service.runToLocation(debugSessionDto.getId(), action);
   }
 
   @Override

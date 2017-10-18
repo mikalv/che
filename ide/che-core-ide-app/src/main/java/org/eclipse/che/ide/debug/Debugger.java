@@ -77,13 +77,14 @@ public interface Debugger extends DebuggerObservable {
   /** Does step over. */
   void stepOver();
 
-  void jumpInto(int lineNumber, String source);
-
   /** Does step out. */
   void stepOut();
 
   /** Resumes application. */
   void resume();
+
+  /** Runs application to specified location. */
+  void runToLocation(int lineNumber, String source);
 
   /** Suspends application. */
   void suspend();

@@ -25,7 +25,14 @@ import org.eclipse.che.api.debug.shared.dto.SimpleValueDto;
 import org.eclipse.che.api.debug.shared.dto.StackFrameDumpDto;
 import org.eclipse.che.api.debug.shared.dto.ThreadStateDto;
 import org.eclipse.che.api.debug.shared.dto.VariableDto;
-import org.eclipse.che.api.debug.shared.dto.action.*;
+import org.eclipse.che.api.debug.shared.dto.action.ActionDto;
+import org.eclipse.che.api.debug.shared.dto.action.ResumeActionDto;
+import org.eclipse.che.api.debug.shared.dto.action.RunToLocationActionDto;
+import org.eclipse.che.api.debug.shared.dto.action.StartActionDto;
+import org.eclipse.che.api.debug.shared.dto.action.StepIntoActionDto;
+import org.eclipse.che.api.debug.shared.dto.action.StepOutActionDto;
+import org.eclipse.che.api.debug.shared.dto.action.StepOverActionDto;
+import org.eclipse.che.api.debug.shared.dto.action.SuspendActionDto;
 import org.eclipse.che.api.promises.client.Promise;
 import org.eclipse.che.ide.api.app.AppContext;
 import org.eclipse.che.ide.json.JsonHelper;
@@ -188,7 +195,7 @@ public class DebuggerServiceClientImpl implements DebuggerServiceClient {
   }
 
   @Override
-  public Promise<Void> jumpInto(String id, RunToLocationActionDto action) {
+  public Promise<Void> runToLocation(String id, RunToLocationActionDto action) {
     return performAction(id, action);
   }
 

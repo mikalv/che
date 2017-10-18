@@ -25,8 +25,8 @@ public interface Breakpoint {
   String getCondition();
 
   /**
-   * Number of activations. If is 0 then breakpoint can be activated an infinite number
-   * of times. If hit count is set to -1 then breakpoint can be activated only by {@link
+   * Number of activations for breakpoint. If is set to 0 then breakpoint can be activated an
+   * infinite number of times. If is set to -1 then breakpoint can be activated only by {@link
    * RunToLocationAction}, but breakpoint will be deleted after {@link ResumeAction}.
    */
   int getHitCount();

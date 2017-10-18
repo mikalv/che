@@ -20,8 +20,8 @@ public interface DebuggerResources extends ClientBundle {
   @Source("resume.svg")
   SVGResource resumeExecution();
 
-  @Source("runtolocation.svg")
-  SVGResource runToLocation();
+  @Source("runtocursor.svg")
+  SVGResource runToCursor();
 
   @Source("connect.svg")
   SVGResource connectButton();
