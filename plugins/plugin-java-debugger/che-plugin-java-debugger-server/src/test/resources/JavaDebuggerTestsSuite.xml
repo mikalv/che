@@ -17,6 +17,7 @@
         <classes>
             <class name="org.eclipse.che.plugin.jdb.server.RunToLocationTest"/>
             <class name="org.eclipse.che.plugin.jdb.server.BreakpointsTest"/>
+            <class name="org.eclipse.che.plugin.jdb.server.BreakpointConditionTest"/>
             <class name="org.eclipse.che.plugin.jdb.server.ThreadDumpTest1"/>
             <class name="org.eclipse.che.plugin.jdb.server.ThreadDumpTest2"/>
             <class name="org.eclipse.che.plugin.jdb.server.StackFrameDumpTest1"/>

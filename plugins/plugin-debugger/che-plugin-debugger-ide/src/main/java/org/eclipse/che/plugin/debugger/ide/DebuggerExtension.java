@@ -40,6 +40,8 @@ import org.eclipse.che.plugin.debugger.ide.actions.StepOverAction;
 import org.eclipse.che.plugin.debugger.ide.actions.SuspendAction;
 import org.eclipse.che.plugin.debugger.ide.configuration.DebugConfigurationsGroup;
 import org.eclipse.che.plugin.debugger.ide.debug.DebuggerPresenter;
+import org.eclipse.che.plugin.debugger.ide.debug.breakpoint.BreakpointActionGroup;
+import org.eclipse.che.plugin.debugger.ide.debug.breakpoint.BreakpointConfigurationAction;
 
 /**
  * Extension allows debug applications.
@@ -66,6 +68,10 @@ public class DebuggerExtension {
   public static final String EVALUATE_EXPRESSION_ID = "evaluateExpression";
   public static final String CHANGE_VARIABLE_VALUE_ID = "changeVariableValue";
   public static final String SHOW_HIDE_DEBUGGER_PANEL_ID = "showHideDebuggerPanel";
+  public static final String BREAKPOINT_CONFIGURATION_ID = "breakpointSettings";
+  public static final String BREAKPOINT_CONTEXT_MENU = "breakpointContextMenu";
+
+  public static final String BREAKPOINT = "breakpoint";
 
   @Inject
   public DebuggerExtension(
@@ -85,9 +91,11 @@ public class DebuggerExtension {
       ChangeVariableValueAction changeVariableValueAction,
       ShowHideDebuggerPanelAction showHideDebuggerPanelAction,
       EditConfigurationsAction editConfigurationsAction,
+      BreakpointConfigurationAction breakpointConfigurationAction,
       DebugConfigurationsGroup configurationsGroup,
       DebuggerPresenter debuggerPresenter,
-      KeyBindingAgent keyBinding) {
+      KeyBindingAgent keyBinding,
+      BreakpointActionGroup breakpointActionGroup) {
     debuggerResources.getCss().ensureInjected();
 
     final DefaultActionGroup runMenu = (DefaultActionGroup) actionManager.getAction(GROUP_RUN);
@@ -105,6 +113,7 @@ public class DebuggerExtension {
     actionManager.registerAction(EVALUATE_EXPRESSION_ID, evaluateExpressionAction);
     actionManager.registerAction(CHANGE_VARIABLE_VALUE_ID, changeVariableValueAction);
     actionManager.registerAction(SHOW_HIDE_DEBUGGER_PANEL_ID, showHideDebuggerPanelAction);
+    actionManager.registerAction(BREAKPOINT_CONFIGURATION_ID, breakpointConfigurationAction);
 
     // create group for selecting (changing) debug configurations
     final DefaultActionGroup debugActionGroup =
@@ -112,6 +121,10 @@ public class DebuggerExtension {
     debugActionGroup.add(debugAction);
     debugActionGroup.addSeparator();
     debugActionGroup.add(configurationsGroup);
+
+    // breakpoint context menu
+    breakpointActionGroup.add(breakpointConfigurationAction);
+    actionManager.registerAction(BREAKPOINT_CONTEXT_MENU, breakpointActionGroup);
 
     // add actions in main menu
     runMenu.addSeparator();

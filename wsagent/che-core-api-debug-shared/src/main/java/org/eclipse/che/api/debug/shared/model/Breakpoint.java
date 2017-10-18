@@ -10,9 +10,6 @@
  */
 package org.eclipse.che.api.debug.shared.model;
 
-import org.eclipse.che.api.debug.shared.model.action.ResumeAction;
-import org.eclipse.che.api.debug.shared.model.action.RunToLocationAction;
-
 /** @author Anatoliy Bazko */
 public interface Breakpoint {
   /** The location of the breakpoint. */
@@ -23,6 +20,8 @@ public interface Breakpoint {
 
   /** The condition. */
   String getCondition();
+
+  void setCondition(String condition);
 
   /**
    * Number of activations for breakpoint. If is set to 0 then breakpoint can be activated an

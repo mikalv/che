@@ -358,7 +358,7 @@ public abstract class AbstractDebugger implements Debugger, DebuggerObservable {
   }
 
   @Override
-  public void addBreakpoint(final VirtualFile file, final Breakpoint breakpoint) {
+  public void addBreakpoint(final Breakpoint breakpoint) {
     if (isConnected()) {
       Location location = breakpoint.getLocation();
 
@@ -368,7 +368,11 @@ public abstract class AbstractDebugger implements Debugger, DebuggerObservable {
       locationDto.setResourceProjectPath(location.getResourceProjectPath());
 
       BreakpointDto breakpointDto =
-          dtoFactory.createDto(BreakpointDto.class).withLocation(locationDto).withEnabled(true);
+          dtoFactory
+              .createDto(BreakpointDto.class)
+              .withLocation(locationDto)
+              .withEnabled(true)
+              .withCondition(breakpoint.getCondition());
 
       Promise<Void> promise = service.addBreakpoint(debugSessionDto.getId(), breakpointDto);
       promise
@@ -386,7 +390,7 @@ public abstract class AbstractDebugger implements Debugger, DebuggerObservable {
   }
 
   @Override
-  public void deleteBreakpoint(final VirtualFile file, final Breakpoint breakpoint) {
+  public void deleteBreakpoint(final Breakpoint breakpoint) {
     if (!isConnected()) {
       return;
     }
@@ -495,6 +499,7 @@ public abstract class AbstractDebugger implements Debugger, DebuggerObservable {
       BreakpointDto breakpointDto = dtoFactory.createDto(BreakpointDto.class);
       breakpointDto.setLocation(locationDto);
       breakpointDto.setEnabled(true);
+      breakpointDto.setCondition(breakpoint.getCondition());
 
       breakpoints.add(breakpointDto);
     }

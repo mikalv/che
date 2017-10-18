@@ -16,8 +16,8 @@ import org.eclipse.che.api.debug.shared.model.Location;
 /** @author Anatoliy Bazko */
 public class BreakpointImpl implements Breakpoint {
   private final Location location;
-  private final boolean enabled;
-  private final String condition;
+  private boolean enabled;
+  private String condition;
   private final int hitCount;
 
   public BreakpointImpl(Location location, boolean enabled, String condition, int hitCount) {
@@ -44,6 +44,11 @@ public class BreakpointImpl implements Breakpoint {
   @Override
   public String getCondition() {
     return condition;
+  }
+
+  @Override
+  public void setCondition(String condition) {
+    this.condition = condition;
   }
 
   @Override
