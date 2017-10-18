@@ -78,7 +78,8 @@ public class BreakpointConditionTest {
                 null,
                 -1),
             true,
-            "i==5");
+            "i==5",
+            0);
 
     debugger.addBreakpoint(breakpoint);
 
