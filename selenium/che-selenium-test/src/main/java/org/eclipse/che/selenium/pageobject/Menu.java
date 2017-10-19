@@ -154,7 +154,7 @@ public class Menu {
         .createAction(seleniumWebDriver)
         .moveToElement(seleniumWebDriver.findElement(By.id(idCommandName)))
         .perform();
-    //if element If the element is not drawn in time, in the catch block call submenu again
+    // if element If the element is not drawn in time, in the catch block call submenu again
     try {
       new WebDriverWait(seleniumWebDriver, REDRAW_UI_ELEMENTS_TIMEOUT_SEC)
           .until(ExpectedConditions.visibilityOfElementLocated(By.id(idSubCommandName)));
@@ -191,7 +191,7 @@ public class Menu {
         .createAction(seleniumWebDriver)
         .moveToElement(seleniumWebDriver.findElement(By.id(idCommandName)))
         .perform();
-    //if element If the element is not drawn in time, in the catch block call submenu again
+    // if element If the element is not drawn in time, in the catch block call submenu again
     try {
       new WebDriverWait(seleniumWebDriver, REDRAW_UI_ELEMENTS_TIMEOUT_SEC)
           .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathSubCommandName)));
@@ -211,7 +211,7 @@ public class Menu {
    * @param idTopMenuCommand name of menu
    */
   public void clickOnCommand(final String idTopMenuCommand) {
-    //TODO Use attributes enabled/disabled instead of css values
+    // TODO Use attributes enabled/disabled instead of css values
     new WebDriverWait(seleniumWebDriver, LOAD_PAGE_TIMEOUT_SEC)
         .until(
             new ExpectedCondition<Boolean>() {
