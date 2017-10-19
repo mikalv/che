@@ -13,6 +13,7 @@ package org.eclipse.che.multiuser.keycloak.server;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureException;
@@ -95,6 +96,10 @@ public class KeycloakAuthenticationFilter extends AbstractKeycloakFilter {
               .parseClaimsJws(token);
       LOG.debug("JWT = ", jwt);
       //OK, we can trust this JWT
+    } catch (ExpiredJwtException ex) {
+      LOG.error("Token ------------------------------>  " + token + "    expired");
+      send403(res);
+      return;
     } catch (SignatureException
         | NoSuchAlgorithmException
         | InvalidKeySpecException
